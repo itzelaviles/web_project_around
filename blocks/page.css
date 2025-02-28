@@ -1,0 +1,9 @@
+body {
+  background-color: black;
+}
+
+.page {
+  max-width: 880px;
+  margin: 45px auto 60px;
+}
+
