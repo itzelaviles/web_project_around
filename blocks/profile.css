@@ -1,0 +1,57 @@
+.profile {
+  display: grid;
+  align-items: center;
+  grid-template-areas:
+    "avatar info btn";
+  grid-template-columns: 0.3fr 1fr 0.28fr;
+  line-height: 1.15;
+  margin-bottom: 50px;
+}
+
+.profile__avatar {
+  grid-area: avatar;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+}
+
+.profile__info {
+  grid-area: info;
+  display: flex;
+  align-items: flex-start;
+}
+
+.profile__info-text {
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__name {
+  font-size: 42px;
+  margin-bottom: 16px;
+}
+
+.profile__description {
+  font-size: 20px;
+}
+
+.profile__btn_edit-info {
+  margin-top: 18px;
+  margin-left: 18px;
+  background-color: black;
+  border: none;
+  outline: 1px solid rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+.profile__btn_add-post {
+  padding: 14px 64px;
+  grid-area: btn;
+  max-width: 150px;
+  max-height: 50px;
+  background-color: black;
+  outline: 2px solid rgba(255, 255, 255, 1);
+  border: none;
+  cursor: pointer;
+}
