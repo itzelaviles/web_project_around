@@ -26,7 +26,7 @@
               <p class="profile__name">Heidy Herran</p>
               <p class="profile__description">Explorer</p>
             </div>
-            <button class="profile__btn_edit-info">
+            <button class="profile__btn profile__btn_edit-info">
               <svg
                 width="10"
                 height="10"
@@ -41,7 +41,7 @@
               </svg>
             </button>
           </div>
-          <button class="profile__btn_add-post">
+          <button class="profile__btn profile__btn_add-post">
             <svg
               width="22"
               height="22"
@@ -67,7 +67,7 @@
             <div class="gallery-card__info">
               <p class="gallery-card__title">Chicago Botanic Garden</p>
               <svg
-                class="gallery-card__btn_like"
+                class="gallery__btn gallery-card__btn_like"
                 width="21"
                 height="19"
                 viewBox="0 0 21 19"
@@ -91,7 +91,7 @@
             <div class="gallery-card__info">
               <p class="gallery-card__title">Skagit Valley</p>
               <svg
-                class="gallery-card__btn_like"
+                class="gallery__btn gallery-card__btn_like"
                 width="21"
                 height="19"
                 viewBox="0 0 21 19"
@@ -115,7 +115,7 @@
             <div class="gallery-card__info">
               <p class="gallery-card__title">Lavender Fields</p>
               <svg
-                class="gallery-card__btn_like"
+                class="gallery__btn gallery-card__btn_like"
                 width="21"
                 height="19"
                 viewBox="0 0 21 19"
@@ -139,7 +139,7 @@
             <div class="gallery-card__info">
               <p class="gallery-card__title">Keunkenhof Garden</p>
               <svg
-                class="gallery-card__btn_like"
+                class="gallery__btn gallery-card__btn_like"
                 width="21"
                 height="19"
                 viewBox="0 0 21 19"
@@ -163,7 +163,7 @@
             <div class="gallery-card__info">
               <p class="gallery-card__title">Ueno Park Tokyo</p>
               <svg
-                class="gallery-card__btn_like"
+                class="gallery__btn gallery-card__btn_like"
                 width="21"
                 height="19"
                 viewBox="0 0 21 19"
@@ -187,7 +187,7 @@
             <div class="gallery-card__info">
               <p class="gallery-card__title">Water Lily Lagoon</p>
               <svg
-                class="gallery-card__btn_like"
+                class="gallery__btn gallery-card__btn_like"
                 width="21"
                 height="19"
                 viewBox="0 0 21 19"
@@ -206,6 +206,45 @@
       <footer>
         <p class="footer__copyright">© 2025 Around The U.S.</p>
       </footer>
+    </div>
+    <!-- popup -->
+    <div class="pop-up">
+      <div class="pop-up__card">
+        <div class="pop-up__container">
+          <button class="form__btn form__btn_close">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M28.5708 0.286517L16 12.8573L3.42918 0.286515L0.286486 3.42921L12.8573 16L0.286486 28.5708L3.42918 31.7135L16 19.1427L28.5708 31.7135L31.7135 28.5708L19.1427 16L31.7135 3.42921L28.5708 0.286517Z"
+                fill="white"
+              />
+            </svg>
+          </button>
+          <p class="pop-up__title">Editar perfil</p>
+          <form class="pop-up__form">
+            <input
+              class="form__input"
+              type="text"
+              id="name"
+              placeholder="Nombre"
+            />
+
+            <input
+              class="form__input"
+              type="text"
+              id="about-me"
+              placeholder="Acerca de mi"
+            />
+
+            <button  class="form__btn form__btn_save">Guardar</button>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>

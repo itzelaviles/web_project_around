@@ -1,8 +1,7 @@
 .profile {
   display: grid;
   align-items: center;
-  grid-template-areas:
-    "avatar info btn";
+  grid-template-areas: "avatar info btn";
   grid-template-columns: 0.3fr 1fr 0.28fr;
   line-height: 1.15;
   margin-bottom: 50px;
@@ -36,13 +35,19 @@
   font-size: 20px;
 }
 
+.profile__btn:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+
 .profile__btn_edit-info {
   margin-top: 18px;
   margin-left: 18px;
   background-color: black;
   border: none;
   outline: 1px solid rgba(255, 255, 255, 1);
-  cursor: pointer;
+
 }
 
 .profile__btn_add-post {
@@ -53,5 +58,4 @@
   background-color: black;
   outline: 2px solid rgba(255, 255, 255, 1);
   border: none;
-  cursor: pointer;
 }

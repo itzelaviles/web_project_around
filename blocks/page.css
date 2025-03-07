@@ -8,3 +8,8 @@ body {
   font-family: "Inter-Regular", sans-serif;
 }
 
+.btn:hover:not(:disabled) {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
