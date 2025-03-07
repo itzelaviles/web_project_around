@@ -44,6 +44,11 @@
   overflow: hidden;
 }
 
+.gallery__btn:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
 .gallery-card__btn_like {
   max-width: 21px;
   max-height: 19px;
