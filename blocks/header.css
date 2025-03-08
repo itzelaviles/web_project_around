@@ -1,5 +1,17 @@
 .header {
-  height: 74px;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
   margin-bottom: 40px;
 }
+
+.header__logo {
+  margin-bottom: 41px;
+}
+
+@media screen and (max-width: 584px) {
+  .header__logo {
+    max-width: 126px;
+    margin-left: 27px;
+    margin-bottom: 32px;
+  }
+}
+
