@@ -2,7 +2,7 @@
   display: grid;
   align-items: center;
   grid-template-areas: "avatar info btn";
-  grid-template-columns: 0.3fr 1fr 0.28fr;
+  grid-template-columns: 1fr 3fr 1fr;
   line-height: 1.15;
   margin-bottom: 50px;
 }
@@ -15,24 +15,21 @@
 }
 
 .profile__info {
-  grid-area: info;
-  display: flex;
-  align-items: flex-start;
-}
-
-.profile__info-text {
   color: white;
-  display: flex;
-  flex-direction: column;
 }
 
 .profile__name {
   font-size: 42px;
-  margin-bottom: 16px;
+}
+
+.profile__name, .profile__btn_edit-info {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .profile__description {
   font-size: 20px;
+  margin-top: 16px;
 }
 
 .profile__btn:hover {
@@ -40,22 +37,97 @@
   cursor: pointer;
 }
 
-
 .profile__btn_edit-info {
-  margin-top: 18px;
-  margin-left: 18px;
+  width: 24px;
+  height: 24px;
   background-color: black;
   border: none;
   outline: 1px solid rgba(255, 255, 255, 1);
+  margin: 5px 0 0 10px;
+  position: relative;
+}
 
+.profile__btn_edit-info svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Ajusta el centro */
 }
 
 .profile__btn_add-post {
-  padding: 14px 64px;
   grid-area: btn;
-  max-width: 150px;
-  max-height: 50px;
+  width: 150px;
+  height: 50px;
   background-color: black;
   outline: 2px solid rgba(255, 255, 255, 1);
   border: none;
+  justify-self: end;
+  position: relative;
+}
+
+.profile__btn_add-post svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Ajusta el centro */
+}
+
+@media screen and (max-width: 584px) {
+  .profile {
+    grid-template-areas:
+      "avatar"
+      "info"
+      "btn";
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+  }
+
+  .profile__info {
+    text-align: center;
+  }
+
+  .profile__name {
+    font-size: 22px;
+  }
+
+  .profile__description {
+    font-size: 14px;
+  }
+
+  .profile__btn_edit-info {
+    max-width: 18px;
+    max-height: 18px;
+    margin-bottom: 5px;
+  }
+
+  .profile__btn_add-post {
+    max-width: 282px;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 584px) and (max-width: 880px) {
+  .profile__info {
+    text-align: center;
+  }
+
+  .profile__name {
+    font-size: 32px;
+  }
+
+  .profile__description {
+    font-size: 18px;
+  }
+
+  .profile__btn_edit-info {
+    max-width: 20px;
+    max-height: 20px;
+    margin-bottom: 5px;
+  }
+
+  .profile__btn_add-post {
+    justify-self: end;
+    max-width: 80px;
+  }
 }
