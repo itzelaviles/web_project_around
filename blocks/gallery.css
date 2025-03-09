@@ -44,14 +44,19 @@
   overflow: hidden;
 }
 
-.gallery__btn:hover {
+.gallery-card__btn:hover {
   cursor: pointer;
   opacity: 0.5;
 }
 
 .gallery-card__btn_like {
-  max-width: 21px;
-  max-height: 19px;
-  margin-left: 5px;
+  border: none;
+  width: 25px;
+  height: 19px;
+  background: url(../images/btn-like.svg) center no-repeat;
+}
+
+.gallery-card__btn_like_active {
+  background-image: url(../images/btn-like-active.svg);
 }
 

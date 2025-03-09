@@ -39,7 +39,7 @@
   padding: 34px 0;
 }
 
-.form__input {
+.pop-up__input {
   width: 100%;
   height: 26px;
   border: none;
@@ -49,7 +49,7 @@
   padding-bottom: 6px;
 }
 
-.form__input::placeholder {
+.pop-up__input::placeholder {
   color: #c4c4c4;
 }
 
@@ -57,11 +57,11 @@ input + input {
   margin-top: 30px;
 }
 
-.form__btn:hover {
+.pop-up__btn:hover {
   cursor: pointer;
 }
 
-.form__btn_save {
+.pop-up__btn_save {
   margin-top: 40px;
   width: 100%;
   font-size: 18px;
@@ -71,11 +71,11 @@ input + input {
   color: white;
 }
 
-.form__btn_save:hover {
+.pop-up__btn_save:hover {
   opacity: 0.8;
 }
 
-.form__btn_close {
+.pop-up__btn_close {
   position: absolute;
   top: -40px;
   right: -40px;
@@ -83,7 +83,7 @@ input + input {
   border: none;
 }
 
-.form__btn_close:hover {
+.pop-up__btn_close:hover {
   opacity: 0.6;
 }
 
@@ -112,16 +112,16 @@ button:disabled:hover {
     font-size: 18px;
   }
 
-  .form__btn_save {
+  .pop-up__btn_save {
     font-size: 14px;
   }
 
-  .form__btn_close {
+  .pop-up__btn_close {
     top: -50px;
     right: 0px;
   }
 
-  .form__btn_close svg {
+  .pop-up__btn_close svg {
     width: 26px;
     height: 26px;
   }
