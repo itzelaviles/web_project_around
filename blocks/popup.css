@@ -1,5 +1,5 @@
 .pop-up {
-  /* display: none; */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -10,6 +10,10 @@
   align-items: center;
   z-index: 1000; /* Asegura que esté encima de todo */
   font-family: "Inter-Regular", sans-serif;
+}
+
+.pop-up_opened {
+  display: block;
 }
 
 .pop-up__title {
@@ -86,8 +90,12 @@ input + input {
 button:disabled {
   background-color: white;
   color: #c4c4c4;
-  cursor: default !important;
   border: 1px solid #c4c4c4;
+}
+
+button:disabled:hover {
+  cursor: default;
+  opacity: 1;
 }
 
 @media screen and (min-width: 320px) and (max-width: 585px) {
