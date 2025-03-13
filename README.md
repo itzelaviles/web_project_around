@@ -21,6 +21,6 @@ Este proyecto es una aplicación web que permite a los usuarios crear y gestiona
 
 ## Funcionalidad
 
-  -Se muestra el perfil de usuario
-  -Sección de fotos
-  -Edición de perfil
+    -Se muestra el perfil de usuario
+    -Sección de fotos
+    -Edición de perfil
