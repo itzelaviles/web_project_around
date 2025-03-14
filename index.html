@@ -55,86 +55,29 @@
           </button>
         </section>
         <section class="gallery">
-          <!--1-->
-          <div class="gallery-card">
-            <img
-              class="gallery-card__image"
-              src="images/chicago-botanic-garden.jpg"
-              alt="Chicago Botanic Garden"
-            />
-            <div class="gallery-card__info">
-              <p class="gallery-card__title">Chicago Botanic Garden</p>
-              <button class="gallery-card__btn gallery-card__btn_like"></button>
+          <template id="gallery-card-template">
+            <div class="gallery-card">
+              <button class="gallery-card__btn gallery-card__btn_trash"></button>
+              <img
+                class="gallery-card__image"
+                src=""
+                alt=""
+              />
+              <div class="gallery-card__info">
+                <p class="gallery-card__title"></p>
+                <button class="gallery-card__btn gallery-card__btn_like"></button>
+              </div>
             </div>
-          </div>
-          <!--2-->
-          <div class="gallery-card">
-            <img
-              class="gallery-card__image"
-              src="images/skagit-valley.jpg"
-              alt="Skagit Valley"
-            />
-            <div class="gallery-card__info">
-              <p class="gallery-card__title">Skagit Valley</p>
-              <button class="gallery-card__btn gallery-card__btn_like"></button>
-            </div>
-          </div>
-          <!--3-->
-          <div class="gallery-card">
-            <img
-              class="gallery-card__image"
-              src="images/lavender-fields.jpg"
-              alt="Lavender Fields"
-            />
-            <div class="gallery-card__info">
-              <p class="gallery-card__title">Lavender Fields</p>
-              <button class="gallery-card__btn gallery-card__btn_like"></button>
-            </div>
-          </div>
-          <!--4-->
-          <div class="gallery-card">
-            <img
-              class="gallery-card__image"
-              src="images/keukenhof.jpg"
-              alt="Keunkenhof Garden"
-            />
-            <div class="gallery-card__info">
-              <p class="gallery-card__title">Keunkenhof Garden</p>
-              <button class="gallery-card__btn gallery-card__btn_like"></button>
-            </div>
-          </div>
-          <!--5-->
-          <div class="gallery-card">
-            <img
-              class="gallery-card__image"
-              src="images/ueno-park-tokyo.jpg"
-              alt="Ueno Park Tokyo"
-            />
-            <div class="gallery-card__info">
-              <p class="gallery-card__title">Ueno Park Tokyo</p>
-              <button class="gallery-card__btn gallery-card__btn_like"></button>
-            </div>
-          </div>
-          <!--6-->
-          <div class="gallery-card">
-            <img
-              class="gallery-card__image"
-              src="images/water-lily-lagoon.jpg"
-              alt="Water Lily Lagoon"
-            />
-            <div class="gallery-card__info">
-              <p class="gallery-card__title">Water Lily Lagoon</p>
-              <button class="gallery-card__btn gallery-card__btn_like"></button>
-            </div>
-          </div>
+          </template>
         </section>
       </main>
       <footer class="footer">
         <p class="footer__copyright">© 2025 Around The U.S.</p>
       </footer>
     </div>
-    <!-- popup -->
-    <div class="pop-up">
+    <!-- POP-UPS -->
+    <!-- Pop-up - Editar perfil -->
+    <div id="edit-profile-popup" class="pop-up">
       <div class="pop-up__card">
         <div class="pop-up__container">
           <button class="pop-up__btn pop-up__btn_close">
@@ -168,6 +111,45 @@
             />
 
             <button class="pop-up__btn pop-up__btn_save">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Pop-up - Nuevo lugar -->
+    <div id="new-place-popup" class="pop-up">
+      <div class="pop-up__card">
+        <div class="pop-up__container">
+          <button class="pop-up__btn pop-up__btn_close">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M28.5708 0.286517L16 12.8573L3.42918 0.286515L0.286486 3.42921L12.8573 16L0.286486 28.5708L3.42918 31.7135L16 19.1427L28.5708 31.7135L31.7135 28.5708L19.1427 16L31.7135 3.42921L28.5708 0.286517Z"
+                fill="white"
+              />
+            </svg>
+          </button>
+          <p class="pop-up__title">Nuevo lugar</p>
+          <form class="pop-up__form">
+            <input
+              id="popup-place-title"
+              class="pop-up__input"
+              type="text"
+              placeholder="Título"
+            />
+
+            <input
+              class="pop-up__input"
+              type="text"
+              id="popup-place-img"
+              placeholder="Enlace a la imagen"
+            />
+
+            <button class="pop-up__btn pop-up__btn_save">Crear</button>
           </form>
         </div>
       </div>

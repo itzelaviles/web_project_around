@@ -61,6 +61,10 @@ input + input {
   cursor: pointer;
 }
 
+.pop-up__btn {
+  border: none;
+}
+
 .pop-up__btn_save {
   margin-top: 40px;
   width: 100%;
