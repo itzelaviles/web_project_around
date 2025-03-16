@@ -82,6 +82,7 @@ gallery.addEventListener("click", (e) => {
     toggleImagePopup();
     imagePopupImg.src = e.target.src;
     imageTitle.textContent = e.target.alt;
+    imagePopupImg.alt = e.target.alt;
   }
 });
 
