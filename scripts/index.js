@@ -82,7 +82,8 @@ gallery.addEventListener("click", (e) => {
     toggleImagePopup();
     imagePopupImg.src = e.target.src;
     imageTitle.textContent = e.target.alt;
-    imagePopupImg.alt = e.target.alt;
+    imagePopupImg.alt = e.target.title;
+    console.log(e.target.title);
   }
 });
 
@@ -96,6 +97,7 @@ function createCard(data) {
   const cardImage = cardElement.querySelector(".gallery-card__image");
   cardImage.src = data.imageUrl;
   cardImage.alt = data.title;
+  cardImage.title = data.title;
 
   const trashButton = cardElement.querySelector(".gallery-card__btn_trash");
   trashButton.addEventListener("click", () => deleteCard(cardElement));
