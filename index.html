@@ -96,20 +96,28 @@
             </svg>
           </button>
           <p class="pop-up__title">Editar perfil</p>
-          <form class="pop-up__form">
+          <form class="pop-up__form" id="edit-profile-form">
             <input
               id="popup-name"
               class="pop-up__input"
               type="text"
               placeholder="Nombre"
+              minlength="2"
+              maxlength="40"
+              required
             />
+            <span class="pop-up__input-error popup-name-error"></span>
 
             <input
               class="pop-up__input"
               type="text"
               id="popup-about-me"
               placeholder="Acerca de mi"
+              minlength="2"
+              maxlength="200"
+              required
             />
+            <span class="pop-up__input-error popup-about-me-error"></span>
 
             <button class="pop-up__btn pop-up__btn_save">Guardar</button>
           </form>
@@ -135,20 +143,28 @@
             </svg>
           </button>
           <p class="pop-up__title">Nuevo lugar</p>
-          <form class="pop-up__form">
+          <form class="pop-up__form" id="new-place-form">
             <input
               id="popup-place-title"
               class="pop-up__input"
               type="text"
               placeholder="Título"
+              minlength="2"
+              maxlength="30"
+              required
             />
+            <span class="pop-up__input-error popup-place-title-error"></span>
 
             <input
               class="pop-up__input"
-              type="text"
+              type="url"
+              pattern="https?://.+\..+"
+              title="Debe ser una URL comenzando con http:// o https://"
               id="popup-place-img"
               placeholder="Enlace a la imagen"
+              required
             />
+            <span class="pop-up__input-error popup-place-img-error"></span>
 
             <button class="pop-up__btn pop-up__btn_save">Crear</button>
           </form>

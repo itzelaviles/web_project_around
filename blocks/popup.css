@@ -1,5 +1,5 @@
 .pop-up {
-  display: none;
+  /* display: none; */
   position: fixed;
   top: 0;
   left: 0;
@@ -10,10 +10,17 @@
   align-items: center;
   z-index: 1000; /* Asegura que esté encima de todo */
   font-family: "Inter-Regular", sans-serif;
+  transition: transform 0.3s ease;
+
+  opacity: 0;
+  visibility: hidden;
+  display: block; /* Cambiado de 'none' a 'flex' */
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .pop-up_opened {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
 
 .pop-up__title {
@@ -22,7 +29,13 @@
   margin-bottom: 50px;
 }
 
+.pop-up__form {
+  position: relative;
+}
+
 .pop-up__card {
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
   margin: auto;
   position: relative;
   top: 25%;
@@ -31,6 +44,10 @@
   height: 100%;
   background-color: white;
   border-radius: 10px;
+}
+
+.pop-up_opened .pop-up__card {
+  transform: scale(1);
 }
 
 .pop-up__container {
@@ -49,12 +66,19 @@
   padding-bottom: 6px;
 }
 
+.pop-up__input ~ .pop-up__input {
+  margin-top: 30px;
+}
+
 .pop-up__input::placeholder {
   color: #c4c4c4;
 }
 
-input + input {
-  margin-top: 30px;
+.pop-up__input-error {
+  position: absolute;
+  font-size: 12px;
+  margin-top: 3px;
+  color: red;
 }
 
 .pop-up__btn:hover {
