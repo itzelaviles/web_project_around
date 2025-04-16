@@ -115,13 +115,13 @@
   opacity: 0.6;
 }
 
-button:disabled {
+.pop-up__btn_disabled {
   background-color: white;
   color: #c4c4c4;
   border: 1px solid #c4c4c4;
 }
 
-button:disabled:hover {
+.pop-up__btn_disabled:hover {
   cursor: default;
   opacity: 1;
 }

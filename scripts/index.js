@@ -1,3 +1,4 @@
+import { enableValidation, resetValidation } from './validate.js';
 // Profile
 const profile = document.querySelector(".profile");
 const profileName = profile.querySelector(".profile__name");
@@ -83,7 +84,6 @@ gallery.addEventListener("click", (e) => {
     imagePopupImg.src = e.target.src;
     imageTitle.textContent = e.target.alt;
     imagePopupImg.alt = e.target.title;
-    console.log(e.target.title);
   }
 });
 
@@ -139,80 +139,16 @@ function togglePopup(popup) {
   if (popup.id === "edit-profile-popup") {
     editProfileName.value = profileName.textContent;
     editProfileDescription.value = profileDescription.textContent;
+  } else if (popup.id === "new-place-popup") {
+    popup.querySelector("#new-place-form").reset();
   }
+  resetValidation(popup);
   popup.classList.toggle("pop-up_opened");
 }
 
 function toggleLike(likeBtn) {
   likeBtn.classList.toggle("gallery-card__btn_like_active");
 }
-
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add("pop-up__input_type_error");
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("pop-up__input-error_active");
-};
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove("pop-up__input_type_error");
-  errorElement.classList.remove("pop-up__input-error_active");
-  errorElement.textContent = "";
-};
-
-// Checks if input is valid or not
-const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    console.log(inputElement.validity);
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-};
-
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.disabled = true;
-  } else {
-    buttonElement.disabled = false;
-  }
-};
-
-//
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(".pop-up__input"));
-  const buttonElement = formElement.querySelector(".pop-up__btn_save");
-  // prevent opening editprofile popup with button disabled
-  if (formElement.id != "edit-profile-form") {
-    toggleButtonState(inputList, buttonElement);
-  }
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-};
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(".pop-up__form"));
-  formList.forEach((formElement) => {
-    formElement.addEventListener("submit", function (evt) {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-};
-
-enableValidation();
 
 // Add listener to close popup if click outside card
 function closeOnOverlay(popupElement, overlayElement, closeFunction) {
@@ -232,8 +168,19 @@ function closeOnOverlay(popupElement, overlayElement, closeFunction) {
 const popupList = Array.from(document.querySelectorAll(".pop-up"));
 popupList.forEach((popupElement) => {
   closeOnOverlay(
-    popupElement.querySelector(".pop-up__card"),
+    popupElement.querySelector(".pop-up__card, .pop-up__section"),
     popupElement,
     () => togglePopup(popupElement)
   );
 });
+
+const validationConfig = {
+  formSelector: ".pop-up__form",
+  inputSelector: ".pop-up__input",
+  submitButtonSelector: ".pop-up__btn_save",
+  inactiveButtonClass: "pop-up__btn_disabled", // Esta clase deberás crearla en tu CSS
+  inputErrorClass: "pop-up__input_type_error",
+  errorClass: "pop-up__input-error_active"
+};
+
+enableValidation();
