@@ -9,7 +9,8 @@ export class Card {
   _getTemplate() {
     return document
       .querySelector(this._templateSelector)
-      .content.querySelector(".gallery-card")
+      .content
+      .querySelector(".gallery-card")
       .cloneNode(true);
   }
 
@@ -24,7 +25,9 @@ export class Card {
 
     this._element
       .querySelector(".gallery-card__image")
-      .addEventListener("click", () => this._handleImageClick());
+      .addEventListener("click", () =>
+        this._handleCardClick({ title: this._title, imageUrl: this._imageUrl })
+      );
   }
 
   _handleLike() {
@@ -36,13 +39,6 @@ export class Card {
   _handleDelete() {
     this._element.remove();
     this._element = null;
-  }
-
-  _handleImageClick() {
-    this._handleCardClick({
-      title: this._title,
-      imageUrl: this._imageUrl,
-    });
   }
 
   getView() {

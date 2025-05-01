@@ -1,0 +1,19 @@
+{
+  "name": "web_project_around",
+  "version": "1.0.0",
+  "description": "Web app that allows users to create and manage their own personalized image galleries.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itzelaviles/web_project_around.git"
+  },
+  "author": "Itzel Aviles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itzelaviles/web_project_around/issues"
+  },
+  "homepage": "https://github.com/itzelaviles/web_project_around#readme"
+}
