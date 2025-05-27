@@ -41,6 +41,7 @@ export const SELECTORS = {
   profile: {
     name: ".profile__name",
     description: ".profile__description",
+    avatar: ".profile__avatar",
     editButton: ".profile__btn_edit-info",
     addButton: ".profile__btn_add-post",
   },
@@ -61,6 +62,7 @@ export const SELECTORS = {
     editProfile: "#edit-profile-popup",
     newPlace: "#new-place-popup",
     image: "#image-popup",
+    deleteCard: "#delete-popup"
   },
 
   gallery: {
