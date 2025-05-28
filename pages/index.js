@@ -7,14 +7,17 @@ import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 import { UserInfo } from "../components/UserInfo.js";
 import {
   SELECTORS,
-  initialCards,
   validationConfig,
 } from "../utils/constants.js";
+import { Api } from "../components/Api.js";
 
-const API_CONFIG = {
-  BASE_URL: "https://around-api.es.tripleten-services.com/v1",
-  TOKEN: "82bdebfc-6145-4c03-b430-768c5ddede6a",
-};
+const api = new Api({
+  baseUrl: 'https://around-api.es.tripleten-services.com/v1',
+  headers: {
+    authorization: "82bdebfc-6145-4c03-b430-768c5ddede6a",
+    "Content-Type": 'application/json'
+  }
+})
 
 // Cachear elementos del DOM reutilizados
 const DOM = {
@@ -42,25 +45,11 @@ const DOM = {
   },
 };
 
-// modificar perfil
+// Creacion de popups
 const editProfilePopup = new PopupWithForm(
   SELECTORS.popups.editProfile,
   (formData) => {
-    fetch(`${API_CONFIG.BASE_URL}/users/me`, {
-      method: "PATCH",
-      headers: {
-        authorization: API_CONFIG.TOKEN,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        about: formData.description,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("Error al actualizar");
-        return response.json();
-      })
+    return api.updateUserInfo(formData)
       .then((userData) => {
         // Actualiza la UI con los nuevos datos
         userInfo.setUserInfo({
@@ -78,20 +67,7 @@ const editProfilePopup = new PopupWithForm(
 const editAvatarPopup = new PopupWithForm(
   SELECTORS.popups.editAvatar,
   (formData) => {
-    fetch(`${API_CONFIG.BASE_URL}/users/me/avatar`, {
-      method: "PATCH",
-      headers: {
-        authorization: API_CONFIG.TOKEN,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        avatar: formData.avatarUrl,
-      })
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("Error al actualizar avatar");
-        return response.json();
-      })
+    return api.updateUserAvatar(formData)
       .then((userData) => {
         // Actualiza la img en el dom
         userInfo.setUserInfo({ avatar: userData.avatar });
@@ -106,26 +82,12 @@ const editAvatarPopup = new PopupWithForm(
 const newPlacePopup = new PopupWithForm(
   SELECTORS.popups.newPlace,
   ({ title, imageUrl }) => {
-    fetch(`${API_CONFIG.BASE_URL}/cards`, {
-      method: "POST",
-      headers: {
-        authorization: API_CONFIG.TOKEN,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: title,
-        link: imageUrl,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("Error al crear tarjeta");
-        return response.json();
-      })
+    return api.addCard({ title, imageUrl })
       .then((newCard) => {
         const card = new Card(newCard,
           SELECTORS.gallery.cardTemplate,
           (data) => imagePopup.open(data),
-          (isLiked, _id) => toggleLike(newCard._id, isLiked),
+          (isLiked, _id) => api.toggleLike(_id, isLiked),
           (_id, cardElement) => {
             deleteCardPopup.setCardData(_id, cardElement);
             deleteCardPopup.open();
@@ -140,46 +102,29 @@ const newPlacePopup = new PopupWithForm(
   }
 );
 
-// Crea la instancia del popup de confirmacion
 const deleteCardPopup = new PopupWithConfirmation(
-  SELECTORS.popups.deleteCard, // Selector del popup
-  (cardId, cardElement) => { // handleFormSubmit
-    // Mostrar estado de "cargando"
-    // deleteCardPopup.showLoading(true);
-
-    // Hacer la peticion DELETE a la api
-    fetch(`${API_CONFIG.BASE_URL}/cards/${cardId}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: API_CONFIG.TOKEN,
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        if (!response.ok) throw new Error('Error al eliminar tarjeta');
+  SELECTORS.popups.deleteCard,
+  (cardId, cardElement) => {
+    api.deleteCard(cardId)
+      .then(() => {
         cardElement.remove();
         deleteCardPopup.close();
       })
       .catch(error => {
-        console.error('Error:', error);
-      })
-      .finally(() => {
-        // // Restaurar el texto original del boton
-        // deleteCardPopup.showLoading(false);
+        console.error('Error: ', error);
       });
   }
 );
 
-deleteCardPopup.setEventListeners();
-
 const imagePopup = new PopupWithImage(SELECTORS.popups.image);
 
 
-// event listeners de popups
+// Event Listeners de popups
 editProfilePopup.setEventListeners();
 newPlacePopup.setEventListeners();
 editAvatarPopup.setEventListeners();
 imagePopup.setEventListeners();
+deleteCardPopup.setEventListeners();
 
 const userInfo = new UserInfo({
   nameSelector: SELECTORS.profile.name,
@@ -214,7 +159,15 @@ function init() {
   new FormValidator(validationConfig, DOM.forms.editProfile).enableValidation();
   new FormValidator(validationConfig, DOM.forms.newPlace).enableValidation();
   new FormValidator(validationConfig, DOM.forms.editAvatar).enableValidation();
-
+  fetch("https://around-api.es.tripleten-services.com/v1/cards/", {
+  headers: {
+    authorization: "82bdebfc-6145-4c03-b430-768c5ddede6a"
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  });
   loadUser()
     .then(() => {
       return getCards();
@@ -228,7 +181,7 @@ function init() {
               item,
               SELECTORS.gallery.cardTemplate,
               (data) => imagePopup.open(data),
-              (isLiked, _id) => toggleLike(item._id, isLiked),
+              (isLiked, _id) => api.toggleLike(_id, isLiked),
               (_id, cardElement) => {
                 deleteCardPopup.setCardData(_id, cardElement);
                 deleteCardPopup.open();
@@ -251,16 +204,7 @@ document.addEventListener("DOMContentLoaded", init);
 
 // Obtener info de usuario
 function loadUser() {
-  return fetch(`${API_CONFIG.BASE_URL}/users/me`, {
-    headers: {
-      authorization: API_CONFIG.TOKEN,
-      "Content-Type": "application/json", //Buena practica para APIs REST
-    },
-  })
-    .then((response) => {
-      if (!response.ok) throw new Error("Error en la petición");
-      return response.json(); // Parsea la respuesta a JSON
-    })
+  return api.getUserInfo()
     .then((userData) => {
       DOM.profile.name.textContent = userData.name;
       DOM.profile.description.textContent = userData.about;
@@ -273,37 +217,9 @@ function loadUser() {
 
 // Obtener cards
 function getCards() {
-  return fetch(`${API_CONFIG.BASE_URL}/cards?`, {
-    headers: {
-      authorization: API_CONFIG.TOKEN,
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) throw new Error("Error en la petición");
-      return response.json(); // Parsea la respuesta a JSON
-    })
+  return api.getInitialCards()
     .catch((error) => {
       console.error("Error: ", error);
       return []; // Regresa array vacio
     });
-}
-
-function toggleLike(cardId, isLiked) {
-  const method = isLiked ? 'PUT' : 'DELETE';
-  return fetch(`${API_CONFIG.BASE_URL}/cards/${cardId}/likes`, {
-    method: method,
-    headers: {
-      authorization: API_CONFIG.TOKEN,
-      "Content-Type": "application/json",
-    },
-  })
-  .then((response) => {
-    if (!response.ok) throw new Error("Error al actualizar like");
-    return response.json();
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-    throw error; // Propaga el error para manejarlo en Card.js
-  });
 }

@@ -77,16 +77,24 @@ export class Card {
   }
 
   _handleLike() {
-    this._toggleLikeUI();
+    const newLikeState = !this._isLiked; // Estado a aplicar
+    const originalState = this._isLiked; // Estado original
 
-    // callback para actualizar el like en la api
-    this._handleLikeClick(this._isLiked, this._id)
-      .then(() => {
+    this._isLiked = newLikeState;
+    this._updateLikeState();
 
+    this._handleLikeClick(newLikeState, this._id)
+      .then((updatedCard) => {
+        if (updatedCard.isLiked !== undefined) {
+          this._isLiked = updatedCard.isLiked;
+          this._updateLikeState();
+        }
       })
       .catch((error) => {
-        console.error("Error al actualizar el like: ", error);
-        this._toggleLikeUI(); // regresa a su estado sin like
-      })
+        console.error("Error:", error);
+        // Revierte al estado original
+        this._isLiked = originalState;
+        this._updateLikeState();
+      });
   }
 }
