@@ -16,7 +16,9 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img class="profile__avatar" src="" alt="Profile avatar" />
+          <div class="profile__avatar-container profile__btn_edit-avatar">
+            <img class="profile__avatar" src="#" alt="Avatar" />
+          </div>
           <div class="profile__info">
             <p class="profile__name"></p>
             <button class="profile__btn profile__btn_edit-info">
@@ -57,7 +59,7 @@
               <button
                 class="gallery-card__btn gallery-card__btn_trash"
               ></button>
-              <img class="gallery-card__image" src="" alt="" />
+              <img class="gallery-card__image" src="#" alt="" />
               <div class="gallery-card__info">
                 <p class="gallery-card__title"></p>
                 <button
@@ -116,6 +118,44 @@
               required
             />
             <span class="pop-up__input-error popup-about-me-error"></span>
+
+            <button class="pop-up__btn pop-up__btn_save">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Editar avatar popup -->
+    <div id="edit-avatar-popup" class="pop-up">
+      <div class="pop-up__card_avatar">
+        <div class="pop-up__container">
+          <button class="pop-up__btn pop-up__btn_close">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M28.5708 0.286517L16 12.8573L3.42918 0.286515L0.286486 3.42921L12.8573 16L0.286486 28.5708L3.42918 31.7135L16 19.1427L28.5708 31.7135L31.7135 28.5708L19.1427 16L31.7135 3.42921L28.5708 0.286517Z"
+                fill="white"
+              />
+            </svg>
+          </button>
+          <p class="pop-up__title">Cambiar foto de perfil</p>
+          <form class="pop-up__form" id="edit-avatar-form">
+
+            <input
+              name="avatarUrl"
+              class="pop-up__input"
+              type="url"
+              pattern="https?://.+\..+"
+              title="Debe ser una URL comenzando con http:// o https://"
+              id="popup-avatar-url"
+              placeholder="Enlace a la imagen"
+              required
+            />
+            <span class="pop-up__input-error popup-avatar-url-error"></span>
 
             <button class="pop-up__btn pop-up__btn_save">Guardar</button>
           </form>
@@ -214,7 +254,7 @@
               />
             </svg>
           </button>
-          <img class="pop-up__img" src="" alt="" />
+          <img class="pop-up__img" src="#" alt="" />
           <p class="pop-up__img-title"></p>
         </div>
       </div>

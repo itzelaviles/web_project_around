@@ -59,6 +59,19 @@
   border-radius: 10px;
 }
 
+.pop-up__card_avatar {
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  margin: auto;
+  position: relative;
+  top: 25%;
+  max-width: 430px;
+  max-height: 272px;
+  height: 100%;
+  background-color: white;
+  border-radius: 10px;
+}
+
 .pop-up__card_confirmation button {
   margin-top: 0;
 }

@@ -42,13 +42,15 @@ export const SELECTORS = {
     name: ".profile__name",
     description: ".profile__description",
     avatar: ".profile__avatar",
-    editButton: ".profile__btn_edit-info",
+    editInfoButton: ".profile__btn_edit-info",
+    editAvatarButton: ".profile__btn_edit-avatar",
     addButton: ".profile__btn_add-post",
   },
 
   forms: {
     editProfile: "#edit-profile-form",
     newPlace: "#new-place-form",
+    editAvatar: "#edit-avatar-form"
   },
 
   inputs: {
@@ -56,13 +58,15 @@ export const SELECTORS = {
     profileDescription: "#popup-about-me",
     placeTitle: "#popup-place-title",
     placeImageUrl: "#popup-place-img",
+    avatarUrl: "#popup-avatar-url"
   },
 
   popups: {
     editProfile: "#edit-profile-popup",
     newPlace: "#new-place-popup",
     image: "#image-popup",
-    deleteCard: "#delete-popup"
+    deleteCard: "#delete-popup",
+    editAvatar: "#edit-avatar-popup"
   },
 
   gallery: {

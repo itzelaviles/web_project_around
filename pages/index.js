@@ -21,6 +21,7 @@ const DOM = {
   forms: {
     editProfile: document.querySelector(SELECTORS.forms.editProfile),
     newPlace: document.querySelector(SELECTORS.forms.newPlace),
+    editAvatar: document.querySelector(SELECTORS.forms.editAvatar)
   },
   inputs: {
     profileName: document.querySelector(SELECTORS.inputs.profileName),
@@ -29,12 +30,14 @@ const DOM = {
     ),
     placeTitle: document.querySelector(SELECTORS.inputs.placeTitle),
     placeImageUrl: document.querySelector(SELECTORS.inputs.placeImageUrl),
+    avatarUrl: document.querySelector(SELECTORS.inputs.avatarUrl)
   },
   profile: {
     name: document.querySelector(SELECTORS.profile.name),
     description: document.querySelector(SELECTORS.profile.description),
     avatar: document.querySelector(SELECTORS.profile.avatar),
-    editButton: document.querySelector(SELECTORS.profile.editButton),
+    editInfoButton: document.querySelector(SELECTORS.profile.editInfoButton),
+    editAvatarButton: document.querySelector(SELECTORS.profile.editAvatarButton),
     addButton: document.querySelector(SELECTORS.profile.addButton),
   },
 };
@@ -65,6 +68,34 @@ const editProfilePopup = new PopupWithForm(
           description: userData.about,
         });
         editProfilePopup.close();
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  }
+);
+
+const editAvatarPopup = new PopupWithForm(
+  SELECTORS.popups.editAvatar,
+  (formData) => {
+    fetch(`${API_CONFIG.BASE_URL}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: API_CONFIG.TOKEN,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        avatar: formData.avatarUrl,
+      })
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Error al actualizar avatar");
+        return response.json();
+      })
+      .then((userData) => {
+        // Actualiza la img en el dom
+        userInfo.setUserInfo({ avatar: userData.avatar });
+        editAvatarPopup.close();
       })
       .catch((error) => {
         console.error("Error: ", error);
@@ -109,14 +140,14 @@ const newPlacePopup = new PopupWithForm(
   }
 );
 
-// Crea la instancia del popup de confirmación
+// Crea la instancia del popup de confirmacion
 const deleteCardPopup = new PopupWithConfirmation(
   SELECTORS.popups.deleteCard, // Selector del popup
   (cardId, cardElement) => { // handleFormSubmit
     // Mostrar estado de "cargando"
     // deleteCardPopup.showLoading(true);
 
-    // Hacer la petición DELETE a la API
+    // Hacer la peticion DELETE a la api
     fetch(`${API_CONFIG.BASE_URL}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
@@ -133,33 +164,41 @@ const deleteCardPopup = new PopupWithConfirmation(
         console.error('Error:', error);
       })
       .finally(() => {
-        // // Restaurar el texto original del botón
+        // // Restaurar el texto original del boton
         // deleteCardPopup.showLoading(false);
       });
   }
 );
 
-// No olvides establecer los event listeners
 deleteCardPopup.setEventListeners();
 
 const imagePopup = new PopupWithImage(SELECTORS.popups.image);
 
+
+// event listeners de popups
 editProfilePopup.setEventListeners();
 newPlacePopup.setEventListeners();
+editAvatarPopup.setEventListeners();
 imagePopup.setEventListeners();
 
 const userInfo = new UserInfo({
   nameSelector: SELECTORS.profile.name,
   descriptionSelector: SELECTORS.profile.description,
+  avatarSelector: SELECTORS.profile.avatar
 });
 
 // Event listeners
-DOM.profile.editButton.addEventListener("click", () => {
+DOM.profile.editInfoButton.addEventListener("click", () => {
   const { name, description } = userInfo.getUserInfo();
   DOM.inputs.profileName.value = name;
   DOM.inputs.profileDescription.value = description;
   editProfilePopup.open();
 });
+
+DOM.profile.editAvatarButton.addEventListener("click", () => {
+  DOM.inputs.avatarUrl.value = "";
+  editAvatarPopup.open();
+})
 
 DOM.profile.addButton.addEventListener("click", () => {
   // Limpia los inputs del formulario de nuevo lugar
@@ -174,6 +213,7 @@ function init() {
   // Validadores
   new FormValidator(validationConfig, DOM.forms.editProfile).enableValidation();
   new FormValidator(validationConfig, DOM.forms.newPlace).enableValidation();
+  new FormValidator(validationConfig, DOM.forms.editAvatar).enableValidation();
 
   loadUser()
     .then(() => {
@@ -206,7 +246,7 @@ function init() {
     });
 }
 
-// Iniciar cuando el DOM esté listo
+// Iniciar cuando el DOM este listo
 document.addEventListener("DOMContentLoaded", init);
 
 // Obtener info de usuario
